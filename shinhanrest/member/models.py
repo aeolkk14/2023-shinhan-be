@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class member(AbstractUser):
+class Member(AbstractUser):
     tel=models.CharField(max_length=32, null=True, blank=True, verbose_name='연락처')
     status=models.CharField(max_length=16, default='일반',
         choices=(
@@ -12,6 +12,8 @@ class member(AbstractUser):
             ('휴면', '휴면'),
         )
     )
+
+    REQUIRED_FIELDS=['tel'] # createsuperuser 할 때 tel이 뜨게 함
 
     class Meta:
         db_table='shinhan_member'
