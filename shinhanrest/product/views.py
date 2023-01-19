@@ -56,4 +56,4 @@ class ProductDetailView(
         return self.destroy(request, args, kwargs)
 
     def put(self, request, *args, **kwargs):
-        return self.partial_update(request, args, kwargs)
+        return self.partial_update(request, args, kwargs) # partial_update: 일부 수정하는 함수

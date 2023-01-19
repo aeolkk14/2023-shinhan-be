@@ -16,7 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from rest_framework_simplejwt.views import(
+    TokenVerifyView,
+    TokenRefreshView,
+    TokenObtainPairView
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/product', include('product.urls')), # product 아래의 urls 파일에 있는 주소들은 'api/product' 이후로 연결
+    path('api/token', TokenObtainPairView.as_view()),
 ]
