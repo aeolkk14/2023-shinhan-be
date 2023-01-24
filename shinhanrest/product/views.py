@@ -1,6 +1,7 @@
 from rest_framework import generics, mixins
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from .models import Product, Comment, Like
 from .serializers import (
     ProductSerializer, 
@@ -22,6 +23,7 @@ class ProductListView(
     serializer_class = ProductSerializer
     pagination_class = ProductLargePagination
     
+    
     def get_queryset(self): 
         products = Product.objects.all()
 
@@ -39,8 +41,10 @@ class ProductListView(
         # Queryset
         # Serialize
         # return Response
-        print(request.user)
-        return self.list(request, args, kwargs)
+        # print(request.user) -> 잘 나오는가
+        if request.user.is_authenticated:
+            return self.list(request, args, kwargs)
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, args, kwargs)
