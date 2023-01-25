@@ -22,7 +22,7 @@ class ProductListView(
 
     serializer_class = ProductSerializer
     pagination_class = ProductLargePagination
-    
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self): 
         products = Product.objects.all()
@@ -42,9 +42,8 @@ class ProductListView(
         # Serialize
         # return Response
         # print(request.user) -> 잘 나오는가
-        if request.user.is_authenticated:
-            return self.list(request, args, kwargs)
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
+        return self.list(request, args, kwargs)
+     
 
     def post(self, request, *args, **kwargs):
         return self.create(request, args, kwargs)
@@ -120,4 +119,3 @@ class LikeCreateView(
             return Response(status=status.HTTP_204_NO_CONTENT)
        
         return self.create(request, args, kwargs)
-
