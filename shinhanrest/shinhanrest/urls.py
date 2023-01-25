@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/product', include('product.urls')), # product 아래의 urls 파일에 있는 주소들은 'api/product' 이후로 연결
     path('api/token', TokenObtainPairView.as_view()),
     path('api/member', include('member.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]

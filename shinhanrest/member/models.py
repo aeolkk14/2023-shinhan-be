@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class Member(AbstractUser):
+class Member(AbstractUser): # AbstractUser 안에 username,password
     tel=models.CharField(max_length=32, null=True, blank=True, verbose_name='연락처')
     status=models.CharField(max_length=16, default='일반',
         choices=(

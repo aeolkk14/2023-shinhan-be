@@ -14,6 +14,14 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class CommentSerializer(serializers.ModelSerializer):
+    product_name = serializers.SerializerMethodField()
+    member_username = serializers.SerializerMethodField()
+
+    def get_product_name(self, obj):
+        return obj.product.name
+
+    def get_member_username(self, obj):
+        return obj.member.username
 
     class Meta:
         model = Comment
