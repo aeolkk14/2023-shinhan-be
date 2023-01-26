@@ -17,6 +17,22 @@
                     },
                     success: (result) => {
                         alert("회원가입 완료");
+                    },
+                    error: (result) => {
+                        const ret = result.responseJSON;
+                        let errorMsg = '';
+
+                        if(ret.password) {
+                            errorMsg += '비밀번호 오류';
+                        }
+
+                        if(ret.username) {
+                            errorMsg += '\n 아이디 오류';
+                        }
+
+                        if(errorMsg) {
+                            alert(errorMsg);
+                        }
                     }
                 })
             }
@@ -30,11 +46,11 @@
             </div>
             <div class="form-group mb-3">
                 <label for="password">비밀번호</label>
-                <input type="text" class="form-control" id="password" name="password" />
+                <input type="password" class="form-control" id="password" name="password" />
             </div>
             <div class="form-group mb-3">
                 <label for="tel">전화번호</label>
-                <input type="number" class="form-control" id="tel" name="tel" />
+                <input type="tel" class="form-control" id="tel" name="tel" />
             </div>
             <div class="text-right">
                 <button type="submit" class="btn btn-primary" onclick="signup()">확인</button>
